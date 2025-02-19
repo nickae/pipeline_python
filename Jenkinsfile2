@@ -1,0 +1,102 @@
+pipeline 
+{
+    agent any 
+
+    environment 
+    {
+        PATH = "$PATH:/var/lib/jenkins/.local/bin"
+        NEXUS_VERSION = "nexus3"
+        NEXUS_PROTOCOL = "http"
+        NEXUS_URL = "10.0.2.15:8081"
+        NEXUS_REPO = "testRepo"
+        ARTIFACT_VERSION = "${BUILD_NUMBER}"
+        NEXUS_CREDENTIAL_ID = "nexusCredential"
+    }
+
+    stages 
+    {
+        stage('setup-env') 
+        {
+            steps 
+            {
+                echo 'Setup stage: Install dependencies in a virtual environment'
+                sh 'python3 -m venv venv'
+                sh '. venv/bin/activate'
+                sh 'pip3 install --break-system-packages -r requirements.txt'
+
+                echo 'Cloning the GitHub repository'
+                withCredentials([usernamePassword(credentialsId: 'sca', usernameVariable: 'nickae', passwordVariable: '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')]) {
+                    sh 'git clone https://nickae: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@github.com/nickae/sca.git'
+                }
+            }
+        }
+        stage('sca') 
+        {
+            steps 
+            {
+                //sh 'python3 staticCodeAnalysis/sa-cli.py staticCodeAnalysis/utility.py pylint test.db'
+                sh 'python3 sca/sa-cli.py sca/utility.py pylint test.db'
+            }
+        }
+        stage('Authenticate with Nexus') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: "${NEXUS_CREDENTIAL_ID}", 
+                                                       usernameVariable: 'NEXUS_USERNAME', 
+                                                       passwordVariable: 'NEXUS_PASSWORD')]) {
+                        // Use the credentials to perform Nexus operations
+                        sh """
+                            curl -u $NEXUS_USERNAME:$NEXUS_PASSWORD $NEXUS_PROTOCOL://$NEXUS_URL/repository/$NEXUS_REPO/
+                        """
+                    }
+                }
+            }
+        }
+
+        /* stage("publishTestDBToNexus") {
+            steps {
+                script {
+                    // Define the path to the test.db file
+                    dbFilePath = "test.db"; // Modify this to the correct path where test.db is located
+        
+                    // Check if the file exists
+                    dbFileExists = fileExists dbFilePath;
+        
+                    if(dbFileExists) {
+                        echo "*** File: ${dbFilePath}, preparing to upload to Nexus";
+        
+                        // Use nexusArtifactUploader to upload the test.db file to Nexus
+                        nexusArtifactUploader(
+                            nexusVersion: 'nexus3', // Nexus version (usually 'nexus3' for Nexus 3)
+                            protocol: 'http', // Protocol (can be 'http' or 'https')
+                            nexusUrl: '10.0.2.15:8081', // Nexus server URL
+                            //groupId: 'com.yourcompany', // Modify this to your desired groupId
+                            version: ARTIFACT_VERSION, // Define the version for the file (can be dynamic)
+                            repository: 'testRepo', // The target repository name (testRepo in your case)
+                            credentialsId: 'nexusCredential', // Define the credentials ID for Nexus authentication
+                            artifacts: [
+                                // Upload the test.db file as an artifact
+                                [artifactId: 'testRepo', // Artifact ID (you can modify it)
+                                 classifier: '',  // You can specify a classifier if needed
+                                 file: dbFilePath, // The actual file path
+                                 type: 'db'] // File type (can be 'db', 'binary', or any custom type)
+                            ]
+                        );
+                    } else {
+                        error "*** File: ${dbFilePath}, could not be found";
+                    }
+                }
+            }
+        }*/
+
+
+        stage('teardown-env') 
+            {
+                steps 
+                {
+                    echo 'Teardown stage: Remove virtual environment'
+                    //sh 'deactivate'
+                }
+            }    
+        }
+}
