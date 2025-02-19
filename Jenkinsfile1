@@ -35,6 +35,34 @@ pipeline
                	sh 'python3 multimeter/multimeter_test.py'
             }
         }
+        stage('build') 
+        {
+            steps {
+                echo 'Build stage: Create wheel file from the source code'
+                sh '''
+                    . venv/bin/activate
+                    pip3 install wheel
+                    python3 setup.py bdist_wheel  # Build the wheel file
+                '''
+            }
+        }
+        stage('archive') {
+            steps {
+                echo 'Archiving wheel files'
+                archiveArtifacts artifacts: 'dist/*.whl', allowEmptyArchive: true
+                sh 'pwd'
+            }
+        }
+        stage('docker-build') {
+            steps {
+                echo 'Docker Build stage: Build a Docker image with the wheel file'
+                sh '''
+                    # Build the Docker image, tagging it with the name "myimage"
+                    docker build -t myimage:latest .
+                '''
+            }
+        }
+
         stage('teardown-env') 
         {
             steps 
