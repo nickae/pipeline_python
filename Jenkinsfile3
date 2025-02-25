@@ -1,7 +1,11 @@
 pipeline 
 {
-    agent any 
-
+    agent {
+        docker {
+            image 'jenkins-agent-with-docker'  // Your custom image with Docker installed
+            args '--privileged'  // Ensure Docker inside Docker works
+        }
+    }
     environment 
     {
         PATH = "$PATH:/var/lib/jenkins/.local/bin"
