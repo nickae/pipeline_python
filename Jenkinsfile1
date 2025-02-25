@@ -38,7 +38,10 @@ pipeline
             steps 
             {
                 echo 'Test stage: run the test cases' 
-               	sh 'python3 multimeter/multimeter_test.py'
+               	sh '''
+                . venv/bin/activate
+                python3 multimeter/multimeter_test.py
+                '''
             }
         }
         stage('build') 
@@ -56,7 +59,6 @@ pipeline
             steps {
                 echo 'Archiving wheel files'
                 archiveArtifacts artifacts: 'dist/*.whl', allowEmptyArchive: true
-                sh 'pwd'
             }
         }
         stage('docker-build') {
