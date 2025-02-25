@@ -65,8 +65,7 @@ pipeline
             steps {
                 echo 'Docker Build stage: Build a Docker image with the wheel file'
                 sh '''
-                    # Build the Docker image, tagging it with the name "myimage"
-                    docker build -t myimage:latest .
+                    docker build -t multimeter:latest .
                 '''
             }
         }
