@@ -68,7 +68,7 @@ pipeline
                     steps {
                         echo 'Upload stage: Upload the artifact to Nexus repository'
                         script {
-                            def nexusUrl = "http://localhost:8081/repository/testRepo/"
+                            def nexusUrl = "http://localhost:8081/repository/test/"
                             def artifact = "dist/*.whl"  // Change this to your actual artifact path
                             def nexusUsername = "admin"  // Set the Nexus username
                             def nexusPassword = "test"  // Set the Nexus password
