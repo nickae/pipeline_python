@@ -74,7 +74,7 @@ pipeline
                             def nexusPassword = "test"  // Set the Nexus password
         
                             sh """
-                                twine upload --repository-url http://localhost:8081/repository/test/ dist/*
+                                curl -u $nexusUsername:$nexusPassword --upload-file $artifact $nexusUrl
                             """
                         }
                     }
