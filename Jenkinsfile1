@@ -79,6 +79,8 @@ pipeline
                             """
                         }
                     }
+                }
+            
 
         stage('teardown-env') 
         {
