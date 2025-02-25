@@ -1,9 +1,8 @@
-pipeline 
-{
+pipeline {
     agent {
         docker {
-            image 'jenkins-agent-with-docker'  // Your custom image with Docker installed
-            args '--privileged'  // Ensure Docker inside Docker works
+            image 'jenkins-agent-with-docker'  // Replace with your Docker image
+            args '--privileged'  // To allow Docker-in-Docker functionality
         }
     }
     environment 
