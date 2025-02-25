@@ -44,31 +44,6 @@ pipeline
                 '''
             }
         }
-        stage('build') 
-        {
-            steps {
-                echo 'Build stage: Create wheel file from the source code'
-                sh '''
-                    . venv/bin/activate
-                    pip3 install wheel
-                    python3 setup.py bdist_wheel  # Build the wheel file
-                '''
-            }
-        }
-        stage('archive') {
-            steps {
-                echo 'Archiving wheel files'
-                archiveArtifacts artifacts: 'dist/*.whl', allowEmptyArchive: true
-            }
-        }
-        stage('docker-build') {
-            steps {
-                echo 'Docker Build stage: Build a Docker image with the wheel file'
-                sh '''
-                    docker build -t multimeter:latest .
-                '''
-            }
-        }
 
         stage('teardown-env') 
         {
