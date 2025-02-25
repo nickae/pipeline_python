@@ -64,6 +64,21 @@ pipeline
                 '''
             }
         }
+        stage('upload-to-nexus') {
+                    steps {
+                        echo 'Upload stage: Upload the artifact to Nexus repository'
+                        script {
+                            def nexusUrl = "http://localhost:8081/repository/my-repo/"
+                            def artifact = "dist/*.whl"  // Change this to your actual artifact path
+                            def nexusUsername = "admin"  // Set the Nexus username
+                            def nexusPassword = "admin123"  // Set the Nexus password
+        
+                            // Upload using curl
+                            sh """
+                                curl -u $nexusUsername:$nexusPassword --upload-file $artifact $nexusUrl
+                            """
+                        }
+                    }
 
         stage('teardown-env') 
         {
