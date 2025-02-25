@@ -17,7 +17,7 @@ pipeline
                 sh 'python3 --version'
                 sh 'python3 -m venv venv'
                 sh '. venv/bin/activate'
-                sh 'python3 -c "import sys; print(sys.prefix)'
+                sh 'python3 -c "import sys; print(sys.prefix)"'
                 sh 'pip3 install --break-system-packages -r requirements.txt'
             }
         }
