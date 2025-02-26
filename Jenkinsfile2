@@ -27,7 +27,7 @@ pipeline
                     withCredentials([usernamePassword(credentialsId: 'sca', usernameVariable: 'nickae', passwordVariable: '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')]) {
                     sh 'git clone https://nickae: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@github.com/nickae/sca.git
                     '''
-                }
+                
             }
         }
         stage('sca') 
