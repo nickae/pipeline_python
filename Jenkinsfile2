@@ -11,6 +11,8 @@ pipeline
         NEXUS_REPO = "testRepo"
         ARTIFACT_VERSION = "${BUILD_NUMBER}"
         NEXUS_CREDENTIAL_ID = "nexusCredential"
+        NEXUS_PASSWORD = "test"
+        NEXUS_USERNAME = "admin"
     }
 
     stages 
