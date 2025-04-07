@@ -83,6 +83,7 @@ pipeline
 
         stage('teardown-env') 
         {
+            agent { label 'agent2' }
             steps 
             {
                 echo 'Teardown stage: Remove virtual environment'
