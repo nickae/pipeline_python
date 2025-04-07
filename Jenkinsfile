@@ -1,7 +1,7 @@
 pipeline 
 {
     agent {
-        docker { image '10.0.2.15:1337/repository/docker/docker-sca' }
+        docker { image "${env.NEXUS_URL_DOCKER}/repository/docker/docker-sca" }
     }
 
     environment 
