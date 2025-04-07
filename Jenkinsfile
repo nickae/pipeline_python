@@ -4,11 +4,6 @@ pipeline
         docker { image "${env.NEXUS_URL_DOCKER}/repository/docker/docker-sca" }
     }
 
-    environment 
-    {
-        PATH = "$PATH:/var/lib/jenkins/.local/bin"
-    }
-
     stages 
     {
         stage('setup-env') 
