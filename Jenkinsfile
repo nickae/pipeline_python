@@ -72,9 +72,7 @@ pipeline
             }
         }
         stage('docker-build') {
-            agent {
-                docker { image "${env.NEXUS_URL_DOCKER}/repository/docker/docker-baseimage" }
-            }
+            agent { label 'agent2' }
             steps {
                 echo 'Docker Build stage: Build a Docker image with the wheel file'
                 sh '''
