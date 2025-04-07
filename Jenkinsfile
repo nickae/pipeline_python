@@ -1,13 +1,13 @@
 pipeline 
 {
-    agent {
-        docker { image "${env.NEXUS_URL_DOCKER}/repository/docker/docker-sca" }
-    }
 
     stages 
     {
         stage('setup-env') 
         {
+            agent {
+                docker { image "${env.NEXUS_URL_DOCKER}/repository/docker/docker-sca" }
+            }
             steps 
             {
                 echo 'Setup stage: Install dependencies in a virtual environment'
@@ -21,6 +21,9 @@ pipeline
         }
         stage('analyze') 
         {
+            agent {
+                docker { image "${env.NEXUS_URL_DOCKER}/repository/docker/docker-sca" }
+            }    
             steps 
             {
                 echo 'Analysis stage: Analyze the source code using pylint' 
@@ -32,6 +35,9 @@ pipeline
         }
         stage('test') 
         {
+            agent {
+                docker { image "${env.NEXUS_URL_DOCKER}/repository/docker/docker-sca" }
+            }
             steps 
             {
                 echo 'Test stage: run the test cases' 
@@ -43,6 +49,9 @@ pipeline
         }
         stage('build') 
         {
+            agent {
+                docker { image "${env.NEXUS_URL_DOCKER}/repository/docker/docker-sca" }
+            }
             steps {
                 echo 'Build stage: Create wheel file from the source code'
                 sh '''
@@ -53,6 +62,9 @@ pipeline
             }
         }
         stage('archive') {
+            agent {
+                docker { image "${env.NEXUS_URL_DOCKER}/repository/docker/docker-sca" }
+            }
             steps {
                 echo 'Archiving wheel files'
                 archiveArtifacts artifacts: 'dist/*.whl', allowEmptyArchive: true
