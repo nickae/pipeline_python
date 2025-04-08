@@ -88,6 +88,6 @@ pipeline
                 echo 'Teardown stage: Remove virtual environment'
                 //sh 'deactivate'
             }
- 
+        }
     }
 }
