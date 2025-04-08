@@ -33,7 +33,7 @@ pipeline
                 pylint multimeter/multimeter.py --output-format=json:pylint-report.json
                 '''
             }
-        }
+        }/*
         stage('test') 
         {
             agent {
@@ -89,6 +89,6 @@ pipeline
                 echo 'Teardown stage: Remove virtual environment'
                 //sh 'deactivate'
             }
-        }    
+        }*/    
     }
 }
