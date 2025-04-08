@@ -80,7 +80,7 @@ pipeline
                 '''
             }
         }
-
+        }*/   
         stage('teardown-env') 
         {
             agent { label 'agent2' }
@@ -89,6 +89,6 @@ pipeline
                 echo 'Teardown stage: Remove virtual environment'
                 //sh 'deactivate'
             }
-        }*/    
+ 
     }
 }
