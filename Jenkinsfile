@@ -62,6 +62,9 @@ pipeline
                 '''
             }
         }
+
+                /*
+                
         stage('archive') {
             agent {
                 docker { image "${env.NEXUS_URL_DOCKER}/repository/docker/docker-sca" }
@@ -72,7 +75,7 @@ pipeline
             }
         }
 
-        /*
+
         
         stage('docker-build') {
             agent { label 'agent2' }
