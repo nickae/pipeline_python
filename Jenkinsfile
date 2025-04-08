@@ -56,7 +56,6 @@ pipeline
             }
         }
 
-        /*
         
         stage('build') 
         {
@@ -105,8 +104,5 @@ pipeline
             }
         }
 
-        */
-
-        
     }
 }
