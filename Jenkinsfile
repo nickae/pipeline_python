@@ -21,8 +21,6 @@ pipeline
             }
         }
 
-                        /*
-        
         stage('analyze') 
         {
             agent {
@@ -37,6 +35,9 @@ pipeline
                 '''
             }
         }
+
+        
+                        /*
         stage('test') 
         {
             agent {
