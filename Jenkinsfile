@@ -30,7 +30,10 @@ pipeline
             {
                 echo 'Analysis stage: Analyze the source code using pylint' 
                 sh '''
+                whoami
+                pwd
                 . /home/endless/venv/bin/activate
+                pwd
                 pylint multimeter/multimeter.py --output-format=json:pylint-report.json
                 '''
             }
