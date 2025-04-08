@@ -36,7 +36,7 @@ pipeline
             }
         }
 
-        /*
+
 
         stage('test') 
         {
@@ -53,7 +53,7 @@ pipeline
             }
         }
 
-
+        /*
         
         stage('build') 
         {
