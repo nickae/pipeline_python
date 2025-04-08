@@ -48,6 +48,10 @@ pipeline
                 '''
             }
         }
+
+
+                /*
+        
         stage('build') 
         {
             agent {
@@ -63,7 +67,6 @@ pipeline
             }
         }
 
-                /*
                 
         stage('archive') {
             agent {
