@@ -33,7 +33,7 @@ pipeline
                 pylint multimeter/multimeter.py --output-format=json:pylint-report.json
                 '''
             }
-        }/*
+        }
         stage('test') 
         {
             agent {
@@ -79,8 +79,7 @@ pipeline
                     docker build -t multimeter:latest .
                 '''
             }
-        }
-        }*/   
+        } 
         stage('teardown-env') 
         {
             agent { label 'agent2' }
