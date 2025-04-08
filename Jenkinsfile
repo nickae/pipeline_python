@@ -94,6 +94,26 @@ pipeline
                 '''
             }
         } 
+
+        
+        stage('sca') 
+        {
+            agent {
+                docker { image '10.25.0.40:1337/repository/docker/docker-sca' }
+            }
+            steps 
+            {
+                echo 'Static-analysis stage: run the cppcheck tool' 
+
+                sh '''
+                pwd
+                . /home/endless/venv/bin/activate
+                python -m utilitysca multimeter/*.py pylint database.db
+                '''
+            }
+
+        } 
+        
         stage('teardown-env') 
         {
             agent { label 'agent2' }
