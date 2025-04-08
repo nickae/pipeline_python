@@ -71,6 +71,9 @@ pipeline
                 archiveArtifacts artifacts: 'dist/*.whl', allowEmptyArchive: true
             }
         }
+
+        /*
+        
         stage('docker-build') {
             agent { label 'agent2' }
             steps {
@@ -88,6 +91,9 @@ pipeline
                 echo 'Teardown stage: Remove virtual environment'
                 //sh 'deactivate'
             }
-        }
+        } 
+
+        */
+        
     }
 }
