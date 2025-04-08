@@ -14,7 +14,7 @@ pipeline
                 echo 'Setup stage: Install dependencies in a virtual environment'
                 sh '''python3 --version
                 python3 -m venv venv
-                . venv/bin/activate
+                . /home/endless/venv/bin/activate
                 python3 -c "import sys; print(sys.prefix)"
                 pip3 install --break-system-packages -r requirements.txt
                 '''
@@ -30,7 +30,7 @@ pipeline
             {
                 echo 'Analysis stage: Analyze the source code using pylint' 
                 sh '''
-                . venv/bin/activate
+                . /home/endless/venv/bin/activate
                 pylint multimeter/multimeter.py --output-format=json:pylint-report.json
                 '''
             }
@@ -47,13 +47,12 @@ pipeline
             {
                 echo 'Test stage: run the test cases' 
                	sh '''
-                . venv/bin/activate
+                . /home/endless/venv/bin/activate
                 python3 multimeter/multimeter_test.py
                 '''
             }
         }
 
-                        /*
 
         
         stage('build') 
@@ -64,7 +63,7 @@ pipeline
             steps {
                 echo 'Build stage: Create wheel file from the source code'
                 sh '''
-                    . venv/bin/activate
+                    . /home/endless/venv/bin/activate
                     pip3 install wheel
                     python3 setup.py bdist_wheel  # Build the wheel file
                 '''
@@ -101,9 +100,6 @@ pipeline
                 echo 'Teardown stage: Remove virtual environment'
                 //sh 'deactivate'
             }
-        } 
-
-        */
-        
+        }    
     }
 }
