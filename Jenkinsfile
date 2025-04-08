@@ -37,7 +37,7 @@ pipeline
         }
 
         
-                        /*
+
         stage('test') 
         {
             agent {
@@ -53,7 +53,7 @@ pipeline
             }
         }
 
-
+                        /*
 
         
         stage('build') 
