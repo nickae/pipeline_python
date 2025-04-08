@@ -20,6 +20,9 @@ pipeline
                 '''
             }
         }
+
+                        /*
+        
         stage('analyze') 
         {
             agent {
@@ -50,7 +53,7 @@ pipeline
         }
 
 
-                /*
+
         
         stage('build') 
         {
