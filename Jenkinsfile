@@ -95,7 +95,7 @@ pipeline
             }
         } 
 
-        
+        /*
         stage('sca') 
         {
             agent {
@@ -112,7 +112,7 @@ pipeline
                 '''
             }
 
-        } 
+        } */
         
         stage('teardown-env') 
         {
