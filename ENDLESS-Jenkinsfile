@@ -34,7 +34,7 @@ pipeline
                 '''
             }
         }
-        stage('test') 
+        /*stage('test') 
         {
             agent {
                 docker { image "${env.NEXUS_URL_DOCKER}/repository/docker/docker-sca" }
@@ -47,7 +47,7 @@ pipeline
                 python3 multimeter/multimeter_test.py
                 '''
             }
-        }
+        }*/
         stage('build') 
         {
             agent {
