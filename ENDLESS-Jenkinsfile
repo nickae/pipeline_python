@@ -38,7 +38,7 @@ pipeline
         {
             agent {
                 docker { image "${env.NEXUS_URL_DOCKER}/repository/docker/docker-sca" }
-            }
+            }   
             steps 
             {
                 echo 'Test stage: run the test cases' 
