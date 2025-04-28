@@ -30,6 +30,7 @@ pipeline
                 echo 'Analysis stage: Analyze the source code using pylint' 
                 sh '''
                 . venv/bin/activate
+                python3 --version
                 pylint multimeter/multimeter.py --output-format=json:pylint-report.json
                 '''
             }
