@@ -40,12 +40,13 @@ pipeline
         {
             agent {
                 docker { image "${env.NEXUS_URL_DOCKER}/repository/docker/docker-sca" }
-            }   
+            }    
             steps 
             {
-                echo 'Test stage: run the test cases' 
-               	sh '''
+                echo 'Test stage: run the test cases'
+                sh '''
                 . venv/bin/activate
+                python3 --version
                 python3 multimeter/multimeter_test.py
                 '''
             }
